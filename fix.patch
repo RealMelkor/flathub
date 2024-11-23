@@ -1,0 +1,251 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index b16fb3b..5f6099f 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -8,8 +8,8 @@ set(BETTERSPADES_PATCH 5)
+ option(ENABLE_TOUCH "Enable touch support including ingame overlay" OFF)
+ option(ENABLE_ANDROID_FILE "Use SDL's file functions" OFF)
+ option(ENABLE_OPENGLES "Build for OpenGL ES" OFF)
+-option(ENABLE_SDL "Build against SDL backend" OFF)
+-option(ENABLE_GLFW "Build against GLFW3 backend" ON)
++option(ENABLE_SDL "Build against SDL backend" ON)
++option(ENABLE_GLFW "Build against GLFW3 backend" OFF)
+ option(ENABLE_SOUND "Enable sound support using OpenAL" ON)
+ option(ENABLE_RPC "Enable Discord Rich Presence support" OFF)
+ 
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 0166470..830f9b7 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -1,22 +1,22 @@
+ include(FetchContent)
+ 
+-FetchContent_Declare(
+-	cglm
+-	GIT_REPOSITORY	https://github.com/recp/cglm
+-	GIT_TAG			v0.8.5
+-)
++#FetchContent_Declare(
++#	cglm
++#	GIT_REPOSITORY	https://github.com/recp/cglm
++#	GIT_TAG			v0.8.5
++#)
+ 
+-set(CGLM_STATIC ON CACHE INTERNAL "")
+-set(CGLM_USE_C99 ON CACHE INTERNAL "")
+-FetchContent_MakeAvailable(cglm)
++#set(CGLM_STATIC ON CACHE INTERNAL "")
++#set(CGLM_USE_C99 ON CACHE INTERNAL "")
++#FetchContent_MakeAvailable(cglm)
+ 
+-FetchContent_Declare(
+-	vxl
+-	GIT_REPOSITORY	https://github.com/xtreme8000/libvxl
+-	GIT_TAG			origin/master
+-)
++#FetchContent_Declare(
++#	vxl
++#	GIT_REPOSITORY	https://github.com/xtreme8000/libvxl
++#	GIT_TAG			origin/master
++#)
+ 
+-FetchContent_MakeAvailable(vxl)
++#FetchContent_MakeAvailable(vxl)
+ 
+ macro(download_file_if_it_doesnt_exist filename url)
+ 	if (NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${filename})
+@@ -33,23 +33,23 @@ macro(download_file_if_it_doesnt_exist filename url)
+ 	endif()
+ endmacro(download_file_if_it_doesnt_exist)
+ 
+-download_file_if_it_doesnt_exist(ini.c https://raw.githubusercontent.com/benhoyt/inih/master/ini.c)
+-download_file_if_it_doesnt_exist(ini.h https://raw.githubusercontent.com/benhoyt/inih/master/ini.h)
+-download_file_if_it_doesnt_exist(lodepng/lodepng.c https://raw.githubusercontent.com/lvandeve/lodepng/master/lodepng.cpp)
+-download_file_if_it_doesnt_exist(lodepng/lodepng.h https://raw.githubusercontent.com/lvandeve/lodepng/master/lodepng.h)
+-download_file_if_it_doesnt_exist(dr_wav.c https://raw.githubusercontent.com/mackron/dr_libs/14707e8ee5aec7620781bcc3b484b8b1607aba50/dr_wav.h)
+-download_file_if_it_doesnt_exist(stb_truetype.h https://raw.githubusercontent.com/nothings/stb/master/stb_truetype.h)
+-download_file_if_it_doesnt_exist(parson.c https://raw.githubusercontent.com/kgabis/parson/master/parson.c)
+-download_file_if_it_doesnt_exist(parson.h https://raw.githubusercontent.com/kgabis/parson/master/parson.h)
+-download_file_if_it_doesnt_exist(http.h https://raw.githubusercontent.com/mattiasgustavsson/libs/main/http.h)
+-download_file_if_it_doesnt_exist(log.h https://raw.githubusercontent.com/xtreme8000/log.c/master/src/log.h)
+-download_file_if_it_doesnt_exist(log.c https://raw.githubusercontent.com/xtreme8000/log.c/master/src/log.c)
+-download_file_if_it_doesnt_exist(hashtable.c https://raw.githubusercontent.com/goldsborough/hashtable/master/hashtable.c)
+-download_file_if_it_doesnt_exist(hashtable.h https://raw.githubusercontent.com/goldsborough/hashtable/master/hashtable.h)
+-download_file_if_it_doesnt_exist(../deps/libdeflate.h https://raw.githubusercontent.com/ebiggers/libdeflate/master/libdeflate.h)
+-download_file_if_it_doesnt_exist(../bsresources.zip http://aos.party/bsresources.zip)
+-download_file_if_it_doesnt_exist(microui.c https://raw.githubusercontent.com/rxi/microui/master/src/microui.c)
+-download_file_if_it_doesnt_exist(microui.h https://raw.githubusercontent.com/rxi/microui/master/src/microui.h)
++#download_file_if_it_doesnt_exist(ini.c https://raw.githubusercontent.com/benhoyt/inih/master/ini.c)
++#download_file_if_it_doesnt_exist(ini.h https://raw.githubusercontent.com/benhoyt/inih/master/ini.h)
++#download_file_if_it_doesnt_exist(lodepng/lodepng.c https://raw.githubusercontent.com/lvandeve/lodepng/master/lodepng.cpp)
++#download_file_if_it_doesnt_exist(lodepng/lodepng.h https://raw.githubusercontent.com/lvandeve/lodepng/master/lodepng.h)
++#download_file_if_it_doesnt_exist(dr_wav.c https://raw.githubusercontent.com/mackron/dr_libs/14707e8ee5aec7620781bcc3b484b8b1607aba50/dr_wav.h)
++#download_file_if_it_doesnt_exist(stb_truetype.h https://raw.githubusercontent.com/nothings/stb/master/stb_truetype.h)
++#download_file_if_it_doesnt_exist(parson.c https://raw.githubusercontent.com/kgabis/parson/master/parson.c)
++#download_file_if_it_doesnt_exist(parson.h https://raw.githubusercontent.com/kgabis/parson/master/parson.h)
++#download_file_if_it_doesnt_exist(http.h https://raw.githubusercontent.com/mattiasgustavsson/libs/main/http.h)
++#download_file_if_it_doesnt_exist(log.h https://raw.githubusercontent.com/xtreme8000/log.c/master/src/log.h)
++#download_file_if_it_doesnt_exist(log.c https://raw.githubusercontent.com/xtreme8000/log.c/master/src/log.c)
++#download_file_if_it_doesnt_exist(hashtable.c https://raw.githubusercontent.com/goldsborough/hashtable/master/hashtable.c)
++#download_file_if_it_doesnt_exist(hashtable.h https://raw.githubusercontent.com/goldsborough/hashtable/master/hashtable.h)
++#download_file_if_it_doesnt_exist(../deps/libdeflate.h https://raw.githubusercontent.com/ebiggers/libdeflate/master/libdeflate.h)
++#download_file_if_it_doesnt_exist(../bsresources.zip http://aos.party/bsresources.zip)
++#download_file_if_it_doesnt_exist(microui.c https://raw.githubusercontent.com/rxi/microui/master/src/microui.c)
++#download_file_if_it_doesnt_exist(microui.h https://raw.githubusercontent.com/rxi/microui/master/src/microui.h)
+ 
+ list(APPEND CLIENT_SOURCES aabb.c)
+ list(APPEND CLIENT_SOURCES camera.c)
+@@ -70,7 +70,7 @@ list(APPEND CLIENT_SOURCES map.c)
+ list(APPEND CLIENT_SOURCES matrix.c)
+ list(APPEND CLIENT_SOURCES model.c)
+ list(APPEND CLIENT_SOURCES network.c)
+-list(APPEND CLIENT_SOURCES parson.c)
++#list(APPEND CLIENT_SOURCES parson.c)
+ list(APPEND CLIENT_SOURCES particle.c)
+ list(APPEND CLIENT_SOURCES player.c)
+ list(APPEND CLIENT_SOURCES sound.c)
+@@ -81,9 +81,9 @@ list(APPEND CLIENT_SOURCES weapon.c)
+ list(APPEND CLIENT_SOURCES window.c)
+ list(APPEND CLIENT_SOURCES utils.c)
+ list(APPEND CLIENT_SOURCES ping.c)
+-list(APPEND CLIENT_SOURCES log.c)
++#list(APPEND CLIENT_SOURCES log.c)
+ list(APPEND CLIENT_SOURCES minheap.c)
+-list(APPEND CLIENT_SOURCES hashtable.c)
++#list(APPEND CLIENT_SOURCES hashtable.c)
+ list(APPEND CLIENT_SOURCES rpc.c)
+ list(APPEND CLIENT_SOURCES tesselator.c)
+ list(APPEND CLIENT_SOURCES microui.c)
+@@ -160,6 +160,8 @@ if(ENABLE_SOUND)
+ endif()
+ find_package(enet REQUIRED)
+ find_package(deflate REQUIRED)
++find_package(cglm REQUIRED)
++find_package(parson REQUIRED)
+ find_package(Threads REQUIRED)
+ if(NOT ENABLE_OPENGLES)
+ 	find_package(OpenGL REQUIRED)
+@@ -179,7 +181,7 @@ if(WIN32)
+ 	target_compile_definitions(client PRIVATE LIBDEFLATE_STATIC)
+ endif()
+ 
+-target_link_libraries(client ${CMAKE_THREAD_LIBS_INIT} ${OPENGL_LIBRARIES} enet::enet deflate::deflate m cglm vxl)
++target_link_libraries(client ${CMAKE_THREAD_LIBS_INIT} ${OPENGL_LIBRARIES} enet::enet deflate::deflate m cglm::cglm parson::parson vxl logc hashtable-static)
+ target_include_directories(client PRIVATE ${OPENAL_INCLUDE_DIRS} ${OPENGL_INCLUDE_DIR} ${OPENGL_EGL_INCLUDE_DIRS})
+ 
+ add_custom_command(
+@@ -194,7 +196,7 @@ add_custom_command(
+ 	POST_BUILD
+ 	COMMENT "Extracting additional third-party assets..."
+ 	DEPENDS ${BetterSpades_SOURCE_DIR}/bsresources.zip
+-	WORKING_DIRECTORY ${BetterSpades_SOURCE_DIR}/build/BetterSpades
++	WORKING_DIRECTORY ${BetterSpades_SOURCE_DIR}/resources
+ 	COMMAND ${CMAKE_COMMAND} -E tar xzf ${BetterSpades_SOURCE_DIR}/bsresources.zip
+ )
+ 
+@@ -204,8 +206,9 @@ install(
+ 	DESTINATION .
+ )
+ 
++#[[
+ install(
+-	FILES "${CMAKE_BINARY_DIR}/BetterSpades/config.ini" "${CMAKE_BINARY_DIR}/BetterSpades/OpenAL32.dll"
++	FILES "${CMAKE_BINARY_DIR}/BetterSpades/config.ini"
+ 	DESTINATION .
+ 	PERMISSIONS	OWNER_EXECUTE OWNER_WRITE OWNER_READ
+ 				GROUP_EXECUTE GROUP_READ
+@@ -249,6 +252,7 @@ install(
+ 	DIRECTORY
+ 	DESTINATION "screenshots"
+ )
++]]
+ 
+ set(CPACK_GENERATOR NSIS)
+ set(CPACK_PACKAGE_NAME "BetterSpades")
+diff --git a/src/config.c b/src/config.c
+index dbfb8eb..cd18ba1 100644
+--- a/src/config.c
++++ b/src/config.c
+@@ -24,6 +24,18 @@
+ #include <limits.h>
+ #include <math.h>
+ 
++const char *config_dir = NULL;
++char config_path_buf[2048];
++
++const char *config_path() {
++	if (config_dir) return config_path_buf;
++	config_dir = getenv("XDG_CONFIG_HOME");
++	if (!config_dir) return NULL;
++	strncpy(config_path_buf, config_dir, sizeof(config_path_buf));
++	strncat(config_path_buf, "/.config.ini", sizeof(config_path_buf));
++	return config_path_buf;
++}
++
+ #include "window.h"
+ #include "file.h"
+ #include "ini.h"
+@@ -95,7 +107,7 @@ void config_save() {
+ 			config_seti("controls", e->name, e->def);
+ 	}
+ 
+-	void* f = file_open("config.ini", "w");
++	void* f = file_open(config_path(), "w");
+ 	if(f) {
+ 		char last_section[32] = {0};
+ 		for(int k = 0; k < list_size(&config_file); k++) {
+@@ -386,7 +398,11 @@ void config_reload() {
+ 
+ 	list_sort(&config_keys, config_key_cmp);
+ 
+-	char* s = file_load("config.ini");
++	char* s = config_path();
++	FILE* f = fopen(s, "rb");
++	if (f) fclose(f);
++	else s = "config.ini";
++	s = file_load(s);
+ 	if(s) {
+ 		ini_parse_string(s, config_read_key, NULL);
+ 		free(s);
+diff --git a/src/hashtable.h b/src/hashtable.h
+new file mode 100644
+index 0000000..12cad47
+--- /dev/null
++++ b/src/hashtable.h
+@@ -0,0 +1 @@
++#include <hashtable.h>
+diff --git a/src/log.h b/src/log.h
+new file mode 100644
+index 0000000..a4012c1
+--- /dev/null
++++ b/src/log.h
+@@ -0,0 +1 @@
++#include <logc/log.h>
+diff --git a/src/main.c b/src/main.c
+index 1e61c35..9584ba8 100644
+--- a/src/main.c
++++ b/src/main.c
+@@ -675,6 +675,7 @@ void on_error(int i, const char* s) {
+ }
+ 
+ int main(int argc, char** argv) {
++	chdir("/app/share/BetterSpades");
+ 	settings.opengl14 = 1;
+ 	settings.color_correction = 0;
+ 	settings.multisamples = 0;
+diff --git a/src/window.c b/src/window.c
+index 8de52d2..53453b4 100644
+--- a/src/window.c
++++ b/src/window.c
+@@ -404,7 +404,10 @@ void window_init() {
+ 	SDL_SetHintWithPriority(SDL_HINT_ANDROID_SEPARATE_MOUSE_AND_TOUCH, "1", SDL_HINT_OVERRIDE);
+ #endif
+ 
+-	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_TIMER);
++	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_TIMER)) {
++		setenv("SDL_VIDEODRIVER", "", 1);
++		SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_TIMER);
++	}
+ 
+ 	hud_window->impl
+ 		= SDL_CreateWindow("BetterSpades " BETTERSPADES_VERSION, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,

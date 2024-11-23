@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Exec=client
+Name=BetterSpades
+GenericName=Classic Voxlap clone
+Comment=An Ace of Spades client
+Keywords=game;fps;sandbox;voxel;aos;
+Icon=party.aos.BetterSpades
+Categories=Game;ActionGame;
+StartupWMClass=betterspades
+X-Flatpak-RenamedFrom=betterspades.desktop;

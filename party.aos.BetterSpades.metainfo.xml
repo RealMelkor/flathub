@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>party.aos.BetterSpades</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0</project_license>
+  <name>BetterSpades</name>
+
+  <summary>Ace of Spades client targeted at low end systems</summary>
+  <developer id="party.aos">
+    <name>xtreme8000</name>
+  </developer>
+
+  <description>
+    <p>BetterSpades is a clone of Ace of Spades 0.75, which is a free online
+    first-person shooter created by Ben Aksoy, featuring fully destructible
+    terrain and plenty of game modes (including the well-known Capture the
+    Flag) created by the community.</p>
+    <ul>
+      <li>Shares similar if not even better performance to voxlap</li>
+      <li>Runs on very old systems back to OpenGL 1.1 (OpenGL ES support too)</li>
+      <li>Open source, and cross platform</li>
+    </ul>
+  </description>
+
+  <categories>
+    <category>Game</category>
+    <category>Shooter</category>
+  </categories>
+
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-cartoon">intense</content_attribute>
+    <content_attribute id="social-chat">intense</content_attribute>
+  </content_rating>
+
+  <launchable type="desktop-id">party.aos.BetterSpades.desktop</launchable>
+
+  <url type="homepage">https://github.com/xtreme8000/BetterSpades</url>
+  <url type="bugtracker">https://github.com/xtreme8000/BetterSpades/issues</url>
+  
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://raw.githubusercontent.com/xtreme8000/BetterSpades/refs/heads/standalone/docs/pic01.png</image>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://raw.githubusercontent.com/xtreme8000/BetterSpades/refs/heads/standalone/docs/pic02.png</image>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://raw.githubusercontent.com/xtreme8000/BetterSpades/refs/heads/standalone/docs/pic03.png</image>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://raw.githubusercontent.com/xtreme8000/BetterSpades/refs/heads/standalone/docs/pic04.png</image>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://raw.githubusercontent.com/xtreme8000/BetterSpades/refs/heads/standalone/docs/pic05.png</image>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://raw.githubusercontent.com/xtreme8000/BetterSpades/refs/heads/standalone/docs/pic06.png</image>
+    </screenshot>
+  </screenshots>
+
+  <releases>
+    <release version="0.1.5" date="2021-05-14">
+      <description>
+        Bump up version
+      </description>
+    </release>
+  </releases>
+</component>

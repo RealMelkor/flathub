@@ -1,0 +1,12 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index e4efff1..a75dc94 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -9,4 +9,7 @@ endif()
+ 
+ add_library(vxl STATIC libvxl.c)
+ 
++install(TARGETS vxl)
++install(FILES libvxl.h DESTINATION include)
++
+ target_include_directories(vxl PUBLIC .)

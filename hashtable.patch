@@ -1,0 +1,15 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index a964241..8e00bb8 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -28,6 +28,9 @@ target_link_libraries(hashtable-example hashtable)
+ ## COMPILER FLAGS
+ ###########################################################
+ 
+-target_compile_options(hashtable PUBLIC -O3 -Os -ansi -g)
++target_compile_options(hashtable PUBLIC -O3 -Os -g)
+ target_compile_options(hashtable-test PUBLIC -ansi -g)
+ target_compile_options(hashtable-example PUBLIC -ansi -g)
++
++install(TARGETS hashtable-static)
++install(FILES hashtable.h DESTINATION include)

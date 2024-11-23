@@ -1,0 +1,150 @@
+app-id: party.aos.BetterSpades
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+command: client
+finish-args: 
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --socket=pulseaudio
+  - --share=ipc
+  - --share=network
+  - --env=LIBDECOR_PLUGIN_DIR=/app/lib/libdecor/plugins-1
+  - --env=SDL_VIDEODRIVER=wayland
+  - --device=dri
+  - --extension=org.freedesktop.Platform.GL=directory=lib/GL
+cleanup: 
+    - /include
+    - /lib/pkgconfig
+    - /lib/cmake
+    - /extra
+modules: 
+  - shared-modules/glew/glew.json
+  - shared-modules/glu/glu-9.json
+  - name: libvxl
+    buildsystem: cmake-ninja
+    sources:
+      - type: git
+        url: https://github.com/xtreme8000/libvxl
+        commit: 2d482be6e738f0befdbb4f63d740c51eef9970a3
+      - type: patch
+        path: libvxl.patch
+  - name: log.c
+    buildsystem: cmake-ninja
+    sources:
+      - type: git
+        url: https://github.com/xtreme8000/log.c
+        commit: 3bc4cee8782b08faf24d0c1d52064afe0ad6c949
+  - name: parson
+    buildsystem: cmake-ninja
+    sources:
+      - type: git
+        url: https://github.com/kgabis/parson
+        commit: ba29f4eda9ea7703a9f6a9cf2b0532a2605723c3
+  - name: enet
+    buildsystem: cmake-ninja
+    sources:
+      - type: git
+        url: https://github.com/lsalzman/enet.git
+        commit: 657eaf97d9d335917c58484a4a4b5e03838ebd8e
+  - name: hashtable
+    buildsystem: cmake-ninja
+    sources:
+      - type: git
+        url: https://github.com/goldsborough/hashtable
+        commit: 86fc717c498572834535284d4a9cc78c3ffd7aed
+      - type: patch
+        path: hashtable.patch
+  - name: libdeflate
+    buildsystem: cmake-ninja
+    cleanup: 
+      - /bin
+    sources:
+      - type: git
+        url: https://github.com/ebiggers/libdeflate
+        commit: c7b053e218705ecc2f923dfe6acb72beb1787641
+  - name: cglm
+    buildsystem: cmake-ninja
+    sources:
+      - type: git
+        url: https://github.com/recp/cglm
+        commit: 93a2926a136430ef870bc5bd1f8fe42b99cb06a6
+      - type: patch
+        path: cglm.patch
+  - name: libdecor
+    buildsystem: meson
+    sources:
+      - type: git
+        url: https://gitlab.freedesktop.org/libdecor/libdecor.git
+        commit: ae2cd6d1a640fe82e0480ba5fc7686312fc4a094
+  - name: betterspades
+    buildsystem: cmake-ninja
+    post-install: 
+      - mkdir -p /app/share/BetterSpades/
+      - cp -r resources/* /app/share/BetterSpades/
+      - install -Dm0644 party.aos.BetterSpades.metainfo.xml /app/share/metainfo/party.aos.BetterSpades.metainfo.xml
+      - install -Dm0644 betterspades.desktop /app/share/applications/party.aos.BetterSpades.desktop
+      - install -Dm0644 resources/icon.png /app/share/icons/hicolor/256x256/apps/party.aos.BetterSpades.png
+      - install -Dm0644 config.ini /app/share/BetterSpades/config.ini
+      - mv /app/client /app/bin/client
+    sources:
+      - type: git
+        url: https://github.com/xtreme8000/BetterSpades
+        commit: 332a8eb54621eddf6e83253f9b0919d226902ae7
+# ini
+      - type: file
+        dest: 'src'
+        url: https://raw.githubusercontent.com/benhoyt/inih/63a302cfe53f087e3c44233cc2f08f05aa29e4c6/ini.c
+        sha256: d6ef1f4c5b1f0060fcc6ddcbd65fcd0049de650955003b33d006da0108175c8c
+      - type: file
+        dest: 'src'
+        url: https://raw.githubusercontent.com/benhoyt/inih/63a302cfe53f087e3c44233cc2f08f05aa29e4c6/ini.h
+        sha256: b5342061a317f8cedd1103c10e241f74c16b5944d62deb9ab9e3e8a3f1ca4e5d
+# microui
+      - type: file
+        dest: 'src'
+        url: https://raw.githubusercontent.com/rxi/microui/0850aba860959c3e75fb3e97120ca92957f9d057/src/microui.c
+        sha256: 880ce7e017fe307553586c9ba8291e9d9f56cdb20bc4188df072f1e8bd9af6dd
+      - type: file
+        dest: 'src'
+        url: https://raw.githubusercontent.com/rxi/microui/0850aba860959c3e75fb3e97120ca92957f9d057/src/microui.h
+# dr_wav
+        sha256: 9aa08e7f58c2152dbfcb4d7deb1f5d79ab1bf0c2809d87f3ff89dc34e24d0c63
+      - type: file
+        dest: 'src'
+        dest-filename: 'dr_wav.c'
+        url: https://raw.githubusercontent.com/mackron/dr_libs/14707e8ee5aec7620781bcc3b484b8b1607aba50/dr_wav.h
+        sha256: 602057bce13d79d22f82f6e215234c66d3cb23b4ea7e28bf2157f2867d2a5519
+# http.h
+      - type: file
+        dest: 'src'
+        url: https://raw.githubusercontent.com/mattiasgustavsson/libs/9d51fbe1efa1ee05dcbaae990f56a3a99bfd3cf7/http.h
+        sha256: a1d26fae0fd5583969519db78f17f7d30c73a422ec0a95e56d05e77f4dfe10a7
+# stb
+      - type: file
+        dest: 'src'
+        url: https://raw.githubusercontent.com/nothings/stb/5c205738c191bcb0abc65c4febfa9bd25ff35234/stb_truetype.h
+        sha256: ecd30b05e0dd4fea3a13c26810dd9e1992dc379049482c393d5a19e6b5090aab
+# lodepng
+      - type: file
+        dest: 'src/lodepng'
+        dest-filename: 'lodepng.c'
+        url: https://raw.githubusercontent.com/lvandeve/lodepng/79a61c79cc62814f315661f53a026004bac80614/lodepng.cpp
+        sha256: 320118b5ef306bccab6ae9b13c4a2c2907c44f1fd48a373858b20399d60cec51
+      - type: file
+        dest: 'src/lodepng'
+        url: https://raw.githubusercontent.com/lvandeve/lodepng/79a61c79cc62814f315661f53a026004bac80614/lodepng.h
+        sha256: 84152d2d973214a890140bac68652077d98168910bfd2931bb6d2605b379bd46
+# patch
+      - type: patch
+        path: fix.patch
+        use-git: true
+      - type: file
+        path: party.aos.BetterSpades.metainfo.xml
+      - type: file
+        path: betterspades.desktop
+      - type: file
+        path: config.ini
+      - type: file
+        url: https://aos.party/bsresources.zip
+        sha256: ded79d840b5d8d7ac4df47bc51d54ac9c1fad0b86a0a7a8694581244cef71179
