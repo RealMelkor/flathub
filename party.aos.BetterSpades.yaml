@@ -17,6 +17,7 @@ cleanup:
     - /include
     - /lib/pkgconfig
     - /lib/cmake
+    - /lib64
     - /extra
 modules: 
   - shared-modules/glew/glew.json
@@ -87,6 +88,8 @@ modules:
       - install -Dm0644 resources/icon.png /app/share/icons/hicolor/256x256/apps/party.aos.BetterSpades.png
       - install -Dm0644 config.ini /app/share/BetterSpades/config.ini
       - mv /app/client /app/bin/client
+      - mkdir -p /app/lib64/
+      - cp -RT /app/lib64/ /app/lib/
     sources:
       - type: git
         url: https://github.com/xtreme8000/BetterSpades
